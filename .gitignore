@@ -1,0 +1,72 @@
+# Python
+
+**pycache**/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+
+venv/
+.env/
+.env.*
+
+# OS Files
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+*.log
+
+# IDE / Editor
+
+.vscode/
+.idea/
+
+# Build / Distribution
+
+build/
+dist/
+*.egg-info/
+
+# Jupyter (if used later)
+
+.ipynb_checkpoints/
+
+# Secrets / Config
+
+config/local_settings.py
+*.env
+
+# Vector DB / Local Data (important for RAG later)
+
+chroma_db/
+*.sqlite3
+
+# Model files (can be large)
+
+models/*.bin
+models/*.pt
+
+# Temporary files
+
+*.tmp
+*.swp
+
+# Coverage / Testing
+
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Node (if React frontend added later)
+
+node_modules/
+dist/
+
+# Mac/Linux system files
+
+*.swp
+*~
