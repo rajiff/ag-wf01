@@ -12,4 +12,7 @@ class SimpleAgent(Agent):
         
         output = self.llm.generate(prompt)
 
+        if output.startswith("[LLM Error]"):
+            return Response(content=output, source="error")
+
         return Response(content=output)
