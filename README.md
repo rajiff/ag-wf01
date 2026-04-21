@@ -165,6 +165,15 @@ This project follows:
 
 * Integrate LLM (basic generation)
 
+This project uses a local LLM via Ollama.
+
+1. Install Ollama: https://ollama.com
+2. Pull a model:
+   ollama pull llama3
+
+3. Ensure Ollama is running:
+   http://localhost:11434
+   
 ### Step 2
 
 * Add RAG pipeline (document retrieval)
