@@ -1,0 +1,3 @@
+Distributed systems are systems where components are located on different networked computers and communicate via messages.
+
+CAP theorem states that a distributed system can provide only two of consistency, availability, and partition tolerance.
