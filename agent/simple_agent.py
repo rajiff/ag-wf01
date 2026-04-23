@@ -17,10 +17,12 @@ class SimpleAgent(Agent):
         return False
     
     def handle(self, message: Message) -> Response:
-        query = message.content
+        query = message.content.strip()
 
-        # Step 1: Decide if retrieval is needed
-        decision_prompt = f"""
+        if self.should_skip_rag(query):
+            use_rag = False
+        else:
+            decision_prompt = f"""
 You are an AI assistant.
 
 Retrieval from external documents is expensive and should be used only if necessary.
@@ -33,19 +35,24 @@ Answer ONLY with YES or NO.
 Question:
 {query}
 """
-        if self.should_skip_rag(query):
-            use_rag = False
-        else:
             decision = self.llm.generate(decision_prompt).strip().upper()
-            
+
             use_rag = "YES" in decision
 
-        print(f"[Decision] use_rag={use_rag}")
-
-        # Step 2: Conditional retrieval
+        context = ""
         if use_rag:
             context = self.retrieval_tool.execute(query)
 
+            if not context or len(context.strip()) < 20: 
+                use_rag = False
+
+        print(f"[Decision] use_rag={use_rag}")
+
+        if use_rag:
+            print(f"[Context Preview] {context[:100]}")
+
+        prompt = ""
+        if use_rag:
             prompt = f"""
 Use the following context to answer the question.
 
@@ -66,7 +73,6 @@ Question:
 
 Answer:
 """
-
         # Step 3: Generate final answer
         output = self.llm.generate(prompt)
 
