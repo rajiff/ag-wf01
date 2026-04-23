@@ -41,9 +41,14 @@ Question:
 
         context = ""
         if use_rag:
-            context = self.retrieval_tool.execute(query)
+            # context = self.retrieval_tool.execute(query)
+            context, distances = self.retrieval_tool.execute(query)
 
             if not context or len(context.strip()) < 20: 
+                use_rag = False
+            
+            print(f"[Decision] distances={distances}")
+            if min(distances) > 1.0:   # tune later
                 use_rag = False
 
         print(f"[Decision] use_rag={use_rag}")

@@ -15,7 +15,9 @@ class Retriever:
 
         results = self.collection.query(
             query_embeddings=[query_embedding],
-            n_results=top_k
+            n_results=top_k,
+            include=["documents", "distances"]
         )
 
-        return results["documents"][0]
+        # return results["documents"][0]
+        return results["documents"][0], results["distances"][0]

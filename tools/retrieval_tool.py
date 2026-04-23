@@ -10,5 +10,5 @@ class RetrievalTool(Tool):
         return "retrieval"
 
     def execute(self, input: str) -> str:
-        docs = self.retriever.retrieve(input)
-        return "\n".join(docs)
+        docs, distances = self.retriever.retrieve(input)
+        return "\n".join(docs), distances
